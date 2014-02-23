@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr" dir="ltr">
+  <head>
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />    
+    <title>html to test new HAXE babylonJs 3d</title>
+	<meta name="author" content="Delettre jean-michel" />
+	<script src="js/babylon.1.5.0.js"></script>
+	<!--
+	<script src="js/Babylon/Tools/babylon.math.js"></script>
+	<script src="js/Babylon/Tools/babylon.tools.js"></script>
+	<script src="js/Babylon/babylon.engine.js"></script>
+	<script src="js/Babylon/Culling/babylon.boundingSphere.js"></script>
+	<script src="js/Babylon/Culling/babylon.boundingBox.js"></script>
+	<script src="js/Babylon/Culling/babylon.boundingInfo.js"></script>
+	<script src="js/Babylon/Lights/babylon.light.js"></script>
+	<script src="js/Babylon/Lights/babylon.pointLight.js"></script>
+	<script src="js/Babylon/Lights/babylon.spotLight.js"></script>
+	<script src="js/Babylon/Lights/babylon.hemisphericLight.js"></script>
+	<script src="js/Babylon/Lights/babylon.directionalLight.js"></script>
+	<script src="js/Babylon/Lights/Shadows/babylon.shadowGenerator.js"></script>
+	<script src="js/Babylon/Collisions/babylon.collider.js"></script>
+	<script src="js/Babylon/Cameras/babylon.camera.js"></script>
+	<script src="js/Babylon/Cameras/babylon.freeCamera.js"></script>
+	<script src="js/Babylon/Cameras/babylon.touchCamera.js"></script>
+	<script src="js/Babylon/Cameras/babylon.arcRotateCamera.js"></script>
+	<script src="js/Babylon/babylon.scene.js"></script>
+	<script src="js/Babylon/Mesh/babylon.vertexBuffer.js"></script>
+	<script src="js/Babylon/Mesh/babylon.mesh.js"></script>
+	<script src="js/Babylon/Mesh/babylon.subMesh.js"></script>
+	<script src="js/Babylon/Rendering/babylon.renderingManager.js"></script>
+	<script src="js/Babylon/Rendering/babylon.renderingGroup.js"></script>
+	<script src="js/Babylon/Materials/textures/babylon.baseTexture.js"></script>
+	<script src="js/Babylon/Materials/textures/babylon.texture.js"></script>
+	<script src="js/Babylon/Materials/textures/babylon.cubeTexture.js"></script>
+	<script src="js/Babylon/Materials/textures/babylon.renderTargetTexture.js"></script>
+	<script src="js/Babylon/Materials/textures/babylon.mirrorTexture.js"></script>
+	<script src="js/Babylon/Materials/textures/babylon.dynamicTexture.js"></script>
+	<script src="js/Babylon/Materials/textures/babylon.videoTexture.js"></script>
+	<script src="js/Babylon/Materials/babylon.effect.js"></script>
+	<script src="js/Babylon/Materials/babylon.material.js"></script>
+	<script src="js/Babylon/Materials/babylon.standardMaterial.js"></script>
+	<script src="js/Babylon/Materials/babylon.multiMaterial.js"></script>
+	<script src="js/Babylon/Tools/babylon.sceneLoader.js"></script>
+	<script src="js/Babylon/Sprites/babylon.spriteManager.js"></script>
+	<script src="js/Babylon/Sprites/babylon.sprite.js"></script>
+	<script src="js/Babylon/Layer/babylon.layer.js"></script>
+	<script src="js/Babylon/Particles/babylon.particle.js"></script>
+	<script src="js/Babylon/Particles/babylon.particleSystem.js"></script>
+	<script src="js/Babylon/PostProcess/babylon.postProcess.js"></script>
+	<script src="js/Babylon/PostProcess/babylon.postProcessManager.js"></script>
+	<script src="js/Babylon/Animations/babylon.animation.js"></script>
+	<script src="js/Babylon/Animations/babylon.animatable.js"></script>
+	<script src="js/Babylon/Culling/Octrees/babylon.octree.js"></script>
+	<script src="js/Babylon/Culling/Octrees/babylon.octreeBlock.js"></script>
+	<script src="js/Babylon/Bones/babylon.bone.js"></script>
+	<script src="js/Babylon/Bones/babylon.skeleton.js"></script>
+	<script src="js/Babylon/Bones/babylon.skeleton.js"></script>	
+ -->
+	
+	
+	<style>
+		html, body {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+            overflow: hidden;
+        }
+        #renderCanvas {
+            width: 100%;
+            height: 77%;
+        }
+		* {
+		  font-family : Arial, Helvetica, sans-serif;
+		  font-size : 14px;
+		  color: #000;
+		}
+		
+	</style>
+  </head>
+  <body id="bodyId">
+	<!--  -->
+	<!--  -->
+	<canvas id="renderCanvas"></canvas>
+	<div id="control">
+		<h1 style="font-size:1.3em;">CAMERA'S ACTIONS</h1>
+		
+		<p>TRANSLATIONS:</p>
+		<span> (</span>
+		<button id="goCam" type="button">GO(z+)</button>
+		<button id="backCam" type="button">BACK(z-)</button>
+		<button id="leftCam" type="button">LEFT(x-)</button>
+		<button id="rightCam" type="button">RIGHT(x+)</button><span> Or use arrow keys)&nbsp;&nbsp;&nbsp;&nbsp;</span>
+		<button id="upCam" type="button">UP(y+)</button>
+		<button id="downCam" type="button">DOWN(y-)</button> 
+		
+		
+		<p>ROTATIONS:</p>
+		<button id="leftRotCam" type="button">TURN LEFT (y-)</button>
+		<button id="rightRotCam" type="button">TURN RIGHT(y+)</button>
+		<button id="upRotCam" type="button">SWING UP(x-)</button>
+		<button id="downRotCam" type="button">SWING DOWN(x+)</button><span> Or use mouse.</span>	
+		<h1 style="text-align:center">Under Google Chrome : Call this file in a local or online web server running. 
+		 Not directly from the file system 
+		</h1>	
+		<h1 style="text-align:center">Under Firefox it could be necessary to active WebGl : Enter "about:config" in the adress bar and set "webgl.force-enabled" to true.
+		</h1>
+	</div>
+	
+
+	<!--  -->
+	<!--  -->
+	
+	<!-- test Haxe --> 
+	<script >
+		
+		/*
+		function onKeyDown () {
+			console.log("key is down");
+		}
+		window.addEventListener("keydown", onKeyDown, false);
+		if (BABYLON.Engine.isSupported()) {
+			var canvas = document.getElementById("renderCanvas");
+			var engine = new BABYLON.Engine(canvas, true);
+			var scene = new BABYLON.Scene(engine);
+		}
+		*/
+	</script>	
+	<!--  <div id="haxe:trace" ></div>--><!--  -->	
+	<script type="text/javascript" src="js/test.js"></script>	  <!--  -->
+		
+  </body>
+</html>

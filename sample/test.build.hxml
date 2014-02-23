@@ -1,0 +1,5 @@
+-cp src/
+-cp ../
+-js bin/js/test.js
+-main Test
+--js-modern
