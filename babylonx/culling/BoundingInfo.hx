@@ -5,7 +5,7 @@ import babylonx.collisions.Collider;
 import babylonx.tools.math.Vector3;
 import babylonx.tools.math.Matrix;
 import babylonx.tools.math.Plane;
-import babylonx.Scene;
+import babylonx.Scene.BabylonMinMax;
 
 //
 @:native("BABYLON.BoundingInfo") extern class BoundingInfo {
@@ -22,4 +22,5 @@ import babylonx.Scene;
 	public function _checkCollision( collider : Collider ) : Bool; 
 	public function intersectsPoint( point : Vector3 ) : Bool;
 	public function intersects( boundingInfo : BoundingInfo, precise : Bool ) : Bool;
+	
 }

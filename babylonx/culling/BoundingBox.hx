@@ -15,6 +15,8 @@ import babylonx.Scene;
 	public var vectorsWorld : Array<Vector3>;
 	public var minimumWorld : Vector3;
 	public var maximumWorld : Vector3;
+	/* var 'extends' in native can't exist in Haxe */
+	public var _extends (get,set) : Vector3;
 	//
 	public function new (minimum : Vector3, maximum : Vector3 ) : Void;
 	//
@@ -25,23 +27,7 @@ import babylonx.Scene;
 	public function intersectsMinMax( min : Vector3, max : Vector3 ) : Bool;
 	public function IsInFrustrum( boundingVectors : Array<Vector3>, frustrumPlanes : Array<Plane> ) : Bool;
 	public function intersects( box0 : BoundingBox, box1 : BoundingBox ) : Bool ;
-}
-//
-/**
- * BoundingBox.extends can't exist in Haxe
- * do : 
- * 		using babylonx.culling.BoundingBox.BB ; 
- * 		// ...
- * 		// bb is a BoundingBox:		
- * 		bb.getExtends(); 
- */
-class BB {
-	public static function getExtends (bb:BoundingBox):Vector3 {
-		var ret = (untyped __js__ ("bb.extends"));
-		return cast(ret, Vector3);
-	}
-	public static function setExtends (bb:BoundingBox, v3:Vector3) {
-		untyped __js__ ("bb.extends=v3;");
-	}
-	
+	///
+	inline function get__extends() :Vector3 { return untyped this['extends']; }
+	inline function set__extends( v : Vector3 ):Vector3 { return untyped this['extends'] = v; }
 }

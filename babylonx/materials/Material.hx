@@ -6,7 +6,7 @@ import babylonx.tools.math.Matrix;
 import babylonx.mesh.Mesh ;
 //
 @:native("BABYLON.Material")
-extern class Material {	
+extern class Material implements MeshMaterial {	
 	public var backFaceCulling  : Bool ;
 	public var wireframe  : Bool ;
 	public var alpha  : Float ;
@@ -27,6 +27,7 @@ extern class Material {
 	public function baseDispose(  ) : Void;
 	public function dispose(  ) : Void;
 }
-
-	
-	
+/*
+* In native, Mesh.material contains Material or MultiMaterial  ;
+*/
+@:remove interface MeshMaterial { }	

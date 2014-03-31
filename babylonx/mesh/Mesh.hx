@@ -10,6 +10,7 @@ import babylonx.collisions.Collider;
 import babylonx.materials.Effect;
 import babylonx.materials.Material;
 import babylonx.Engine;
+import babylonx.materials.Material.MeshMaterial;
 import babylonx.materials.StandardMaterial;
 import babylonx.Scene;
 import babylonx.tools.math.Vector2;
@@ -51,7 +52,7 @@ extern class Mesh {
 	public var rotationQuaternion:Quaternion;
 	public var rotation:Vector3;
 	public var position:Vector3;
-	public var material:Material;
+	public var material:MeshMaterial; // MeshMaterial don't exist in native ; @see Material
 	public var parent:Mesh;
 	public var checkCollisions:Bool;
 	public var subMeshes:Array<SubMesh>;	
@@ -67,7 +68,6 @@ extern class Mesh {
 	public var onDispose:Void->Void;
 	public var skeleton:Skeleton;
 	public var renderingGroupId:Int;
-	public var _vertexBuffers:Map<String, VertexBuffer>; 
 	//
 	public function new(name:String, scene:Scene);
 	//
@@ -78,15 +78,22 @@ extern class Mesh {
 	static public function CreateGround(name:String, width:Float, height:Float, subdivisions:Int, scene:Scene, updatable:Bool):Mesh ;	
 	static public function CreateGroundFromHeightMap(name:String, url:String, width:Float, height:Float, subdivisions:Int, minHeight:Float, maxHeight:Float, scene:Scene, updatable:Bool):Mesh ;
 	static public function ComputeNormal  (positions:Array < Float > , normals:Array < Float > , indices:Array < Int > ) : Void;
-	
+	//
 	public function getBoundingInfo():BoundingInfo ;	
 	public function getScene():Scene ;	
 	public function getWorldMatrix():Matrix ;	
 	public function getTotalVertices():Int  ;	
 	public function getAbsolutePosition():Vector3  ;	
-	public function setAbsolutePosition(absolutePosition:Dynamic = null):Void;	
-	public function getVerticesData(kind:String):Array<Float> ;	
-	public function getVertexBuffer(kind:String):VertexBuffer ;	
+	public function setAbsolutePosition(absolutePosition:Dynamic ):Void;	
+	public function getVerticesData(kind:String):Array<Float> ;		
+	// public function getVertexBuffer(kind:String):VertexBuffer ; 
+	// don't exists in older versions ,
+	// so :
+	public var _vertexBuffers :Dynamic<VertexBuffer>; // ex: Reflect.field( mesh._vertexBuffers , VertexBuffer.PositionKind ) ;
+	inline public function getVertexBuffer  (kind:String) : VertexBuffer {
+		return untyped _vertexBuffers[kind] ;
+	}
+	//
 	public function isVerticesDataPresent(kind:String):Bool ;	
 	public function getVerticesDataKinds():Array<String> ;
 	public function setVerticesData(data:Array<Float>, kind:String, updatable:Bool):Void;	
